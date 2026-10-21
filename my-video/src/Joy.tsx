@@ -24,20 +24,20 @@ const defaultClips: JoyClip[] = [
   {
     src: "trip1.mp4",
     from: 12,
-    seconds: 4,
+    seconds: 2,
     landscape: true,
   },
   { src: "trip3.mp4", from: 6, seconds: 3 },
   {
     src: "trip2.mp4",
     from: 4,
-    seconds: 3,
+    seconds: 2,
     landscape: true,
   },
   {
     src: "trip1.mp4",
     from: 30,
-    seconds: 3,
+    seconds: 2,
     landscape: true,
   },
 ];
