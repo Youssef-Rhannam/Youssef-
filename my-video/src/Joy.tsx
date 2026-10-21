@@ -1,13 +1,9 @@
 import {
   AbsoluteFill,
   Composition,
-  interpolate,
   OffthreadVideo,
   Sequence,
-  spring,
   staticFile,
-  useCurrentFrame,
-  useVideoConfig,
 } from "remotion";
 
 export type JoyClip = {
@@ -15,7 +11,6 @@ export type JoyClip = {
   /** Where to start inside the source video, in seconds. */
   from: number;
   seconds: number;
-  caption: string;
   /** Source is landscape: shown fitted over a blurred copy of itself. */
   landscape?: boolean;
 };
@@ -23,30 +18,26 @@ export type JoyClip = {
 type Props = { clips: JoyClip[]; title: string };
 
 const FPS = 30;
-const FADE = 6;
 
 const defaultClips: JoyClip[] = [
-  { src: "trip4.mp4", from: 0, seconds: 3, caption: "Shanghai, China" },
+  { src: "trip4.mp4", from: 0, seconds: 3 },
   {
     src: "trip1.mp4",
     from: 12,
     seconds: 4,
-    caption: "Farha w sa3ada",
     landscape: true,
   },
-  { src: "trip3.mp4", from: 6, seconds: 3, caption: "Smile = Happiness" },
+  { src: "trip3.mp4", from: 6, seconds: 3 },
   {
     src: "trip2.mp4",
     from: 4,
     seconds: 3,
-    caption: "Dikrayat jmila",
     landscape: true,
   },
   {
     src: "trip1.mp4",
     from: 30,
     seconds: 3,
-    caption: "Merci China",
     landscape: true,
   },
 ];
@@ -55,19 +46,10 @@ const Slide: React.FC<{ clip: JoyClip; frames: number }> = ({
   clip,
   frames,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-  const opacity = interpolate(
-    frame,
-    [0, FADE, frames - FADE, frames],
-    [0, 1, 1, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" },
-  );
-  const pop = spring({ frame: frame - 6, fps, config: { damping: 12 } });
   const common = { startFrom: Math.round(clip.from * FPS) };
 
   return (
-    <AbsoluteFill style={{ backgroundColor: "black", opacity }}>
+    <AbsoluteFill style={{ backgroundColor: "black" }}>
       {clip.landscape ? (
         <>
           <OffthreadVideo
@@ -97,22 +79,6 @@ const Slide: React.FC<{ clip: JoyClip; frames: number }> = ({
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
       )}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 260,
-          width: "100%",
-          textAlign: "center",
-          color: "white",
-          fontFamily: "Helvetica, Arial, sans-serif",
-          fontWeight: 800,
-          fontSize: 76,
-          textShadow: "0 3px 12px rgba(0,0,0,0.7)",
-          transform: `scale(${pop})`,
-        }}
-      >
-        {clip.caption}
-      </div>
     </AbsoluteFill>
   );
 };
