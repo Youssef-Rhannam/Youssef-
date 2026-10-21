@@ -20,26 +20,10 @@ type Props = { clips: JoyClip[]; title: string };
 const FPS = 30;
 
 const defaultClips: JoyClip[] = [
-  { src: "trip4.mp4", from: 0, seconds: 3 },
-  {
-    src: "trip1.mp4",
-    from: 12,
-    seconds: 2,
-    landscape: true,
-  },
-  { src: "trip3.mp4", from: 6, seconds: 3 },
-  {
-    src: "trip2.mp4",
-    from: 4,
-    seconds: 2,
-    landscape: true,
-  },
-  {
-    src: "trip1.mp4",
-    from: 30,
-    seconds: 2,
-    landscape: true,
-  },
+  { src: "trip4.mp4", from: 0, seconds: 11 },
+  { src: "trip1.mp4", from: 0, seconds: 43.4, landscape: true },
+  { src: "trip3.mp4", from: 0, seconds: 31.8 },
+  { src: "trip2.mp4", from: 0, seconds: 25.5, landscape: true },
 ];
 
 const Slide: React.FC<{ clip: JoyClip; frames: number }> = ({
